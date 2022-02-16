@@ -7,6 +7,8 @@ namespace ECS.Test.Unit
         [SetUp]
         public void Setup()
         {
+           //Hold kæft det ser godt ud gutter!! Skylder et par bajere i baren næste gang
+         
         }
 
         [Test]
