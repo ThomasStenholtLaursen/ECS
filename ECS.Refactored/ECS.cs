@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ECS.Legacy
+namespace ECS.Refactored
 {
     public class ECS
     {
-        private readonly TempSensor _tempSensor;
-        private readonly Heater _heater;
-        private int _threshold;
+        private readonly ISensor _tempSensor;
+        private readonly IRegulate _heater;
+        public int Threshold { get; private set; }
 
         public ECS(int thr)
         {
-            SetThreshold(thr);
+            Threshold = thr;
             _tempSensor = new TempSensor();
             _heater = new Heater();
         }
@@ -19,7 +23,7 @@ namespace ECS.Legacy
         {
             var t = _tempSensor.GetSample();
             Console.WriteLine($"Temperatur measured was {t}");
-            if (t < _threshold)
+            if (t < Threshold)
                 _heater.TurnOn();
             else
                 _heater.TurnOff();
@@ -30,15 +34,6 @@ namespace ECS.Legacy
             return _tempSensor.GetSample();
         }
 
-        public void SetThreshold(int thr)
-        {
-            _threshold = thr;
-        }
-
-        public int GetThreshold()
-        {
-            return _threshold;
-        }
         public bool RunSelfTest()
         {
             return _tempSensor.RunSelfTest() && _heater.RunSelfTest();

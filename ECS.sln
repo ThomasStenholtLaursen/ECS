@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECS.Legacy", "ECS.Legacy\ECS.Legacy.csproj", "{04BB7A61-C926-4654-A911-EA7EAE974326}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECS.Legacy", "ECS.Legacy\ECS.Legacy.csproj", "{04BB7A61-C926-4654-A911-EA7EAE974326}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECS.Refactored", "ECS.Refactored\ECS.Refactored.csproj", "{EC70D1DA-D427-407F-90B8-22607D07E3FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{04BB7A61-C926-4654-A911-EA7EAE974326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04BB7A61-C926-4654-A911-EA7EAE974326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04BB7A61-C926-4654-A911-EA7EAE974326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC70D1DA-D427-407F-90B8-22607D07E3FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC70D1DA-D427-407F-90B8-22607D07E3FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC70D1DA-D427-407F-90B8-22607D07E3FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC70D1DA-D427-407F-90B8-22607D07E3FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

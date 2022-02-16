@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ECS.Legacy
+namespace ECS.Refactored
 {
-    internal class TempSensor
+    public class TempSensor : ISensor
     {
         private Random gen = new Random();
-        
         public int GetSample()
         {
             return gen.Next(-5, 45);
