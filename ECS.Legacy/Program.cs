@@ -17,8 +17,6 @@ namespace ECS.Legacy
 
                 control.Regulate();
             }
-
-
         }
     }
 }
