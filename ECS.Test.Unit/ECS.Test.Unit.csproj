@@ -14,4 +14,8 @@
     <PackageReference Include="NunitXml.TestLogger" Version="3.0.117" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ECS.Refactored\ECS.Refactored.csproj" />
+  </ItemGroup>
+
 </Project>
