@@ -21,7 +21,14 @@ namespace ECS.Refactored
             ThresholdUpper = thrUpper;
             _tempSensor = sensor;
             _heater = heater;
-            _window = window; 
+            _window = window;
+            
+            if(ThresholdLower > ThresholdUpper)
+            {
+                Console.WriteLine("Invalid upper or lower threshold");
+               throw new InvalidOperationException;
+            }
+
         }
 
         public void Regulate()
@@ -29,12 +36,12 @@ namespace ECS.Refactored
             var t = _tempSensor.GetSample();
             Console.WriteLine($"Temperatur measured was {t}");
             
-            if (t > ThresholdUpper)
+            if (t > ThresholdUpper) // 15
                 _window.TurnOn();
             else
             {
                 _window.TurnOff();
-                if (t < ThresholdLower)
+                if (t < ThresholdLower) //10
                     _heater.TurnOn();
                 else
                     _heater.TurnOff();
