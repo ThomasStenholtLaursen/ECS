@@ -7,10 +7,12 @@ namespace ECS.Refactored
         static void Main(string[] args)
         {
             Console.WriteLine("Testing ECS.Refactored");
-            var sensor = new TempSensor();
-            var regulator = new Heater();
-            // Make an ECS with a threshold of 23
-            var control = new ECS(23, sensor, regulator);
+            ISensor sensor = new TempSensor();
+            IRegulate heater = new Heater();
+            IRegulate window = new Window();
+
+            
+            var control = new ECS(20, 30, sensor, heater, window);
 
             for (int i = 1; i <= 15; i++)
             {

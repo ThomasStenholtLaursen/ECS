@@ -13,9 +13,10 @@ namespace ECSTestUnit
         [SetUp]
         public void Setup()
         {
+
             _regulator = new FakeHeater();
             _sensor = new FakeSensor();
-            _uut = new global::ECS.Refactored.ECS(20, _sensor, _regulator);
+            //_uut = new global::ECS.Refactored.ECS(20, _sensor, _regulator);
         }
 
         [Test]
@@ -31,6 +32,7 @@ namespace ECSTestUnit
             _uut.Regulate();
             
             Assert.That(_regulator.TurnOnCount, Is.EqualTo(1));
+
         }
 
         //[TestCase(9, 1, 0)]
@@ -44,10 +46,10 @@ namespace ECSTestUnit
             _uut.Regulate();
             
             Assert.That(_regulator.TurnOnCount, Is.EqualTo(1));
-            _uut.Threshold = 10;
+            _uut.ThresholdLower = 10;
             _uut.Regulate();
             Assert.That(_regulator.TurnOffCount, Is.EqualTo(1));
-            _uut.Threshold = 20;
+            _uut.ThresholdLower = 20;
             _uut.Regulate();
             Assert.That(_regulator.TurnOnCount, Is.EqualTo(2));
         }
