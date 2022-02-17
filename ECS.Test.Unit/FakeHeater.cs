@@ -5,23 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using ECS.Refactored;
 
-namespace ECS.Test.Unit
+namespace ECSTestUnit
 {
     public class FakeHeater : IRegulate
     {
+        public int TurnOnCount { get; set; } = 0;
+        public int TurnOffCount { get; set; } = 0;
         public void TurnOff()
         {
-            throw new NotImplementedException();
+            TurnOffCount++;
         }
 
         public void TurnOn()
         {
-            throw new NotImplementedException();
+            TurnOnCount++;
         }
 
         public bool RunSelfTest()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

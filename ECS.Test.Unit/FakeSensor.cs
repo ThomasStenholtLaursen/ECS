@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ECS.Refactored;
 
-namespace ECS.Test.Unit
+namespace ECSTestUnit
 {
     public class FakeSensor : ISensor
     {
         public int GetSample()
         {
-            throw new NotImplementedException();
+            return 10;
         }
 
         public bool RunSelfTest()

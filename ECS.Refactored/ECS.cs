@@ -10,7 +10,7 @@ namespace ECS.Refactored
     {
         private readonly ISensor _tempSensor;
         private readonly IRegulate _regulater;
-        public int Threshold { get; private set; }
+        public int Threshold { get; set; }
 
         public ECS(int thr, ISensor sensor, IRegulate regulator)
         {
