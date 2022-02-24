@@ -26,7 +26,7 @@ namespace ECS.Refactored
             if(ThresholdLower > ThresholdUpper)
             {
                 Console.WriteLine("Invalid upper or lower threshold");
-               throw new InvalidOperationException;
+               throw new InvalidOperationException();
             }
 
         }
