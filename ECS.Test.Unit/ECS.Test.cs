@@ -1,96 +1,53 @@
+using NSubstitute;
 using ECS.Refactored;
 using NUnit.Framework;
-using ECS = ECS.Refactored.ECS;
 
-namespace ECSTestUnit
+namespace ECS.Test.Unit
 {
     public class Tests
     {
-        private FakeHeater _heater;
-        private FakeSensor _sensor;
-        private FakeWindow _window;
-        private global::ECS.Refactored.ECS _uut;
-
+        private IRegulate _fakeHeater;
+        private ISensor _fakeSensor;
+        private IRegulate _fakeWindow;
+        private ECS.Refactored.ECS _uut;
+            
         [SetUp]
         public void Setup()
         {
-            _window = new FakeWindow();
-            _heater = new FakeHeater();
-            _sensor = new FakeSensor();
-            _uut = new global::ECS.Refactored.ECS(10, 15, _sensor, _heater, _window);
+            _fakeHeater = Substitute.For<IRegulate>();
+            _fakeSensor = Substitute.For<ISensor>();
+            _fakeWindow = Substitute.For<IRegulate>();
+            _uut = new ECS.Refactored.ECS(18, 25, _fakeSensor, _fakeHeater, _fakeWindow);
+
         }
 
         [Test]
-        public void UnitTestOfGetCurTemp()
+        public void Regulate_LowTemp_HeaterOn()
         {
-            int test = _uut.GetCurTemp();
-            Assert.That(test,Is.EqualTo(10));
-        }
+            _fakeSensor.GetSample().Returns(17);
 
-        [Test] 
-        public void UnitTestOfRegulate()
-        {
             _uut.Regulate();
 
-            Assert.That(_heater.TurnOnCount, Is.EqualTo(0));
-            Assert.That(_heater.TurnOffCount, Is.EqualTo(1));
-
-            Assert.That(_window.TurnOnCount, Is.EqualTo(0));
-            Assert.That(_window.TurnOffCount, Is.EqualTo(1));
-
+            _fakeHeater.Received(1).TurnOn();
         }
+        [Test]
+        public void Regulate_TempOnLowThres_HeaterNotCalled()
+        {
+            _fakeSensor.GetSample().Returns(18);
 
-        //[TestCase(9, 1, 0)]
-        //[TestCase(14, 0,1)]
-        //[TestCase(6, 1,0)]
-        //[TestCase(15, 0,1)]
-        //int threshold, int turnon, int turnoff
-        //[Test]
-        //public void UnitTestOfRegulate_multiple() // Virker ikke Daniel Kehlet
-        //{
-        //    _uut.Regulate(); //Lower threshold = 10, Upper = 15
+            _uut.Regulate();
 
-        //    Assert.That(_heater.TurnOnCount, Is.EqualTo(0));
-        //    Assert.That(_heater.TurnOffCount, Is.EqualTo(1));
+            _fakeHeater.DidNotReceive();
+        }
+        [Test]
+        public void Regulate_TempHigh_WindowOpened()
+        {
+            _fakeSensor.GetSample().Returns(26);
 
-        //    Assert.That(_window.TurnOnCount, Is.EqualTo(0));
-        //    Assert.That(_window.TurnOffCount, Is.EqualTo(1));
+            _uut.Regulate();
 
-        //    _uut.ThresholdLower = 9;
-        //    _uut.ThresholdUpper = 11;
-        //    _uut.Regulate();
-
-        //    Assert.That(_heater.TurnOnCount, Is.EqualTo(1));
-        //    Assert.That(_heater.TurnOffCount, Is.EqualTo(1));
-
-        //    Assert.That(_window.TurnOnCount, Is.EqualTo(0));
-        //    Assert.That(_window.TurnOffCount, Is.EqualTo(2));
-
-        //    _uut.ThresholdLower = 8;
-        //    _uut.ThresholdUpper = 9;
-        //    _uut.Regulate();
-
-        //    Assert.That(_heater.TurnOnCount, Is.EqualTo(2));
-        //    Assert.That(_heater.TurnOffCount, Is.EqualTo(1));
-
-        //    Assert.That(_window.TurnOnCount, Is.EqualTo(1));
-        //    Assert.That(_window.TurnOffCount, Is.EqualTo(3));
-
-        //    _uut.ThresholdLower = 11;
-        //    _uut.ThresholdUpper = 15;
-        //    _uut.Regulate();
-
-        //    Assert.That(_heater.TurnOnCount, Is.EqualTo(3));
-        //    Assert.That(_heater.TurnOffCount, Is.EqualTo(2));
-
-        //    Assert.That(_window.TurnOnCount, Is.EqualTo(1));
-        //    Assert.That(_window.TurnOffCount, Is.EqualTo(4));
-
-        //    //_uut.ThresholdLower = 26;
-        //    //_uut.Regulate();
-        //    //
-        //    //Assert.That(_heater.TurnOnCount, Is.EqualTo(2));
-        //}   //
+            _fakeWindow.Received(1).TurnOn();
+        }
 
 
     }
